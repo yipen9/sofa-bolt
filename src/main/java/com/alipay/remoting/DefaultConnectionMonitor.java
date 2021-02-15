@@ -57,7 +57,7 @@ public class DefaultConnectionMonitor extends AbstractLifeCycle {
     }
 
     @Override
-    public void startup() throws LifeCycleException {
+    public void  startup() throws LifeCycleException {
         super.startup();
 
         /* initial delay to execute schedule task, unit: ms */

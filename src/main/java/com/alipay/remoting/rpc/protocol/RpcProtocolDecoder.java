@@ -34,7 +34,7 @@ public class RpcProtocolDecoder extends ProtocolCodeBasedDecoder {
     }
 
     @Override
-    protected byte decodeProtocolVersion(ByteBuf in) {
+    protected byte decodeProtocolVersion(ByteBuf in) {  //默认protocolCodeLength是1，protocolVersion也是1
         in.resetReaderIndex();
         if (in.readableBytes() >= protocolCodeLength + DEFAULT_PROTOCOL_VERSION_LENGTH) {
             byte rpcProtocolCodeByte = in.readByte();
@@ -42,6 +42,6 @@ public class RpcProtocolDecoder extends ProtocolCodeBasedDecoder {
                 return in.readByte();
             }
         }
-        return DEFAULT_ILLEGAL_PROTOCOL_VERSION_LENGTH;
+        return DEFAULT_ILLEGAL_PROTOCOL_VERSION_LENGTH; //默认非合法的协议version
     }
 }

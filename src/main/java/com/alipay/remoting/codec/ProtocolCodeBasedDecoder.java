@@ -54,7 +54,7 @@ public class ProtocolCodeBasedDecoder extends AbstractBatchDecoder {
      * @param in input byte buf
      * @return an instance of ProtocolCode
      */
-    protected ProtocolCode decodeProtocolCode(ByteBuf in) {
+    protected ProtocolCode  decodeProtocolCode(ByteBuf in) {
         if (in.readableBytes() >= protocolCodeLength) {
             byte[] protocolCodeBytes = new byte[protocolCodeLength];
             in.readBytes(protocolCodeBytes);
@@ -78,17 +78,17 @@ public class ProtocolCodeBasedDecoder extends AbstractBatchDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-        in.markReaderIndex();
+        in.markReaderIndex();   //mark readerIndex
         ProtocolCode protocolCode = decodeProtocolCode(in);
         if (null != protocolCode) {
-            byte protocolVersion = decodeProtocolVersion(in);
+            byte protocolVersion = decodeProtocolVersion(in);   //获得协议的version
             if (ctx.channel().attr(Connection.PROTOCOL).get() == null) {
-                ctx.channel().attr(Connection.PROTOCOL).set(protocolCode);
+                ctx.channel().attr(Connection.PROTOCOL).set(protocolCode);  //设置这个channel的PROTOCOL
                 if (DEFAULT_ILLEGAL_PROTOCOL_VERSION_LENGTH != protocolVersion) {
-                    ctx.channel().attr(Connection.VERSION).set(protocolVersion);
+                    ctx.channel().attr(Connection.VERSION).set(protocolVersion);    //设置这个channel的VERSION
                 }
             }
-            Protocol protocol = ProtocolManager.getProtocol(protocolCode);
+            Protocol protocol = ProtocolManager.getProtocol(protocolCode);  //根据protolCode获取对应Protocol
             if (null != protocol) {
                 in.resetReaderIndex();
                 protocol.getDecoder().decode(ctx, in, out);

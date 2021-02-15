@@ -77,7 +77,7 @@ public class ConnectionUtil {
     public static InvokeFuture getGroupRequestCallBack(Integer id, Channel channel) {
         Connection connection = getConnectionFromChannel(channel);
         if (connection != null) {
-            return connection.getInvokeFuture(id);
+            return connection.getInvokeFuture(id);  //根据id，获取connection之前设置的InvokeFuture
         }
 
         return null;

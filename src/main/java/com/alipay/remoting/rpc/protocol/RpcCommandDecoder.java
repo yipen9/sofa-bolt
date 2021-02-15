@@ -57,10 +57,10 @@ public class RpcCommandDecoder implements CommandDecoder {
     @Override
     public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         // the less length between response header and request header
-        if (in.readableBytes() >= lessLen) {
-            in.markReaderIndex();
-            byte protocol = in.readByte();
-            in.resetReaderIndex();
+        if (in.readableBytes() >= lessLen) {    //request或者response的header长度
+            in.markReaderIndex();       //mark readerIndex
+            byte protocol = in.readByte();  //  读取对应协议
+            in.resetReaderIndex();          //
             if (protocol == RpcProtocol.PROTOCOL_CODE) {
                 /*
                  * ver: version for protocol

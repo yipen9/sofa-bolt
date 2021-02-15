@@ -57,7 +57,7 @@ public class RpcHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {   //处理channelReader
         ProtocolCode protocolCode = ctx.channel().attr(Connection.PROTOCOL).get();
         Protocol protocol = ProtocolManager.getProtocol(protocolCode);
         protocol.getCommandHandler().handleCommand(
