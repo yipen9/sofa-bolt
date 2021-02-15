@@ -56,7 +56,7 @@ public class RpcResponseProcessor extends AbstractRemotingProcessor<RemotingComm
      * @see com.alipay.remoting.AbstractRemotingProcessor#doProcess
      */
     @Override
-    public void doProcess(RemotingContext ctx, RemotingCommand cmd) {
+    public void doProcess(RemotingContext ctx, RemotingCommand cmd) {   //此处处理对应的response
 
         Connection conn = ctx.getChannelContext().channel().attr(Connection.CONNECTION).get();
         InvokeFuture future = conn.removeInvokeFuture(cmd.getId());
